@@ -14,17 +14,14 @@ class SudokuGenerator:
             for j in range(3):
                 self.grid[row + i][col + j] = nums.pop(random.randrange(len(nums)))
                 
-    def fill_3x3(self, row, col):
-        for i in range(3):
-            cur_row = row + i
-            for j in range(3):
-                cur_col = col + j
-                while True:
-                    num = random.randint(1, 9)
-                    if (self.is_not_used(cur_row, cur_col, num)):
-                        self.grid[cur_row][cur_col] = num
-                        break
-                
+    def fill_empty(self, row, col):
+        if self.grid[row][col] != 0:
+            return
+        
+        for num in range(1, 10):
+            if (self.is_not_used(row, col, num)):
+                self.grid[row][col] = num
+                return
                 
     def is_not_used(self, row, col, num):
         return self.not_in_box(row, col, num) and self.not_in_row(row, num) and self.not_in_col(col, num)
@@ -57,6 +54,12 @@ class SudokuGenerator:
     def generate(self):
         for i in range(0, 9, 3):
             self.fill_random_3x3(i, i)
+            
+        for i in range(9):
+            for j in range(9):
+                self.fill_empty(i, j)
+                print(i, j, self.grid[i][j])
+
         
         return self.grid
     
