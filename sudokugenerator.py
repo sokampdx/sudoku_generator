@@ -13,15 +13,25 @@ class SudokuGenerator:
         for i in range(3):
             for j in range(3):
                 self.grid[row + i][col + j] = nums.pop(random.randrange(len(nums)))
-                
+    
     def fill_empty(self, row, col):
+        if row == 9:
+            return True
+        
+        if col == 9:
+            return self.fill_empty(row + 1, 0)
+        
         if self.grid[row][col] != 0:
-            return
+            return self.fill_empty(row, col + 1)
         
         for num in range(1, 10):
-            if (self.is_not_used(row, col, num)):
+            if self.is_not_used(row, col, num):
                 self.grid[row][col] = num
-                return
+                if self.fill_empty(row, col + 1):
+                    return True
+                self.grid[row][col] = 0
+                
+        return False
                 
     def is_not_used(self, row, col, num):
         return self.not_in_box(row, col, num) and self.not_in_row(row, num) and self.not_in_col(col, num)
