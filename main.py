@@ -7,6 +7,6 @@ if __name__ == "__main__":
     random.seed()
     
     k = 20
-    sudoku = SudokuGenerator()
+    sudoku = SudokuGenerator(k)
     
     SudokuGenerator.printGrid(sudoku.generate())

@@ -2,8 +2,9 @@ import random
 
 
 class SudokuGenerator:
-    def __init__(self):
+    def __init__(self, k = 0):
         self.grid = [[0] * 9 for _ in range(9)]
+        self.num_empty = k
         
     def generate_1_to_9(self):
         return list(range(1, 10))
@@ -58,9 +59,17 @@ class SudokuGenerator:
             if (self.grid[i][col] == num):
                 return False
             
-        return True
+        return True 
                     
-
+    def create_empty_cell(self, num):
+        for _ in range(num):
+            i = random.randint(0,8)
+            j = random.randint(0,8)
+            while self.grid[i][j] == 0:
+                i = random.randint(0,8)
+                j = random.randint(0,8)
+            self.grid[i][j] = 0
+        
     def generate(self):
         for i in range(0, 9, 3):
             self.fill_random_3x3(i, i)
@@ -68,8 +77,8 @@ class SudokuGenerator:
         for i in range(9):
             for j in range(9):
                 self.fill_empty(i, j)
-                print(i, j, self.grid[i][j])
-
+        
+        self.create_empty_cell(self.num_empty)
         
         return self.grid
     
