@@ -13,6 +13,45 @@ class SudokuGenerator:
         for i in range(3):
             for j in range(3):
                 self.grid[row + i][col + j] = nums.pop(random.randrange(len(nums)))
+                
+    def fill_3x3(self, row, col):
+        for i in range(3):
+            cur_row = row + i
+            for j in range(3):
+                cur_col = col + j
+                while True:
+                    num = random.randint(1, 9)
+                    if (self.is_not_used(cur_row, cur_col, num)):
+                        self.grid[cur_row][cur_col] = num
+                        break
+                
+                
+    def is_not_used(self, row, col, num):
+        return self.not_in_box(row, col, num) and self.not_in_row(row, num) and self.not_in_col(col, num)
+                
+    def not_in_box(self, row, col, num):
+        row_start = row // 3 * 3
+        col_start = col // 3 * 3
+        for i in range(3):
+            for j in range(3):
+                if (self.grid[row_start + i][col_start + j] == num):
+                    return False
+
+        return True
+        
+    def not_in_row(self, row, num):
+        for j in range(9):
+            if (self.grid[row][j] == num):
+                return False
+            
+        return True
+    
+    def not_in_col(self, col, num):
+        for i in range(9):
+            if (self.grid[i][col] == num):
+                return False
+            
+        return True
                     
 
     def generate(self):

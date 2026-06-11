@@ -1,6 +1,6 @@
 import random
 
-from src.sudokugenerator import SudokuGenerator
+from sudokugenerator import SudokuGenerator
 
 
 if __name__ == "__main__":
