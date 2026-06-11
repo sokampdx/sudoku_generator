@@ -1,15 +1,12 @@
-
 import random
 
+from sudokugenerator import SudokuGenerator
 
-def sudoku_generator(empty):
-    pass
 
 if __name__ == "__main__":
     random.seed()
     
     k = 20
-    puzzle = sudoku_generator(k)
+    sudoku = SudokuGenerator()
     
-    for r in puzzle:
-        print(" ".join(map(str, r)))
+    SudokuGenerator.printGrid(sudoku.generate())
