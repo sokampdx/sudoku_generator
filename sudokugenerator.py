@@ -12,8 +12,7 @@ class SudokuGenerator:
         nums = self.generate_1_to_9()
         for i in range(3):
             for j in range(3):
-                while len(nums) > 0:
-                    self.grid[row + i][col + i] = nums.pop(random.randrange(len(nums)))
+                self.grid[row + i][col + j] = nums.pop(random.randrange(len(nums)))
                     
 
     def generate(self):
@@ -26,3 +25,10 @@ class SudokuGenerator:
     def printGrid(grid):
         for r in grid:
             print(" ".join(map(str, r)))
+    
+    @staticmethod
+    def emptyGrid():
+        return [[0] * 9 for _ in range(9)]
+    
+    def reset(self):
+        self.grid = [[0] * 9 for _ in range(9)]
