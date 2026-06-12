@@ -1,6 +1,9 @@
 import random
 
 from sudokugenerator import SudokuGenerator
+from sudokusolver import SudokuSolver
+from sudoku import Sudoku
+
 
 
 if __name__ == "__main__":
@@ -8,5 +11,9 @@ if __name__ == "__main__":
     
     k = 20
     sudoku = SudokuGenerator(k)
+    puzzle = sudoku.generate()
+    Sudoku.printGrid(puzzle)
     
-    SudokuGenerator.printGrid(sudoku.generate())
+    solver = SudokuSolver()
+    solved = solver.solve
+    Sudoku.printGrid(solved)

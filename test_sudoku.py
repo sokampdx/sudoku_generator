@@ -46,7 +46,7 @@ class TestSudoku(unittest.TestCase):
         s.grid[3][4] = 1
         self.assertTrue(s.not_in_col(4, 2))      
         
-    def test_fill_empty(self):
+    def test_fill_empty_correctly(self):
         s = Sudoku()
         self.setup_grid(s.grid, 3, 3)
         s.grid[5][5] = 0
